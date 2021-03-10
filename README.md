@@ -6,7 +6,7 @@ Operating system of Texas Instuments is **TI-RTOS**.
 
 The real advantage of this microcontroller is the low power capability, the board is able to sink few uA in low power mode, making possible to run with a single charge even for years ([link](https://www.ti.com/tool/TIDA-00757)). 
 
-In this repository you will find explanations and step by step for the development of a system that every certain time interval (which you will set) will collect data from 5 sensors, this data package will be sent to a special gateway designed by *IOT2TANGLE* that you will have on the local network. This gateway will be in charge of adding these packages to **Tangle Network of IOTA**, through *Streams*.
+In this repository you will find explanations and step by step for the development of a system that every certain time interval (which you will set) will collect data from 4 sensors, this data package will be sent to a special gateway designed by *IOT2TANGLE* that you will have on the local network. This gateway will be in charge of adding these packages to **Tangle Network of IOTA**, through *Streams*.
 
 ## I2T Sensors Stack
 
