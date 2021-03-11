@@ -92,6 +92,11 @@
 #include "sensors.h"
 #include "BLEutilities.h"
 #include <ti/drivers/i2c/I2CCC26XX.h>
+
+
+extern int flag_mpu6060;
+extern int flag_bh1750;
+extern int flag_bme280;
 /*********************************************************************
  * MACROS
  */
@@ -654,6 +659,7 @@ static void ProjectZero_init(void)
 
 
 
+    if(flag_mpu6060){
     InertialService_AddService(selfEntity);
     uint8_t InertialService_Name_initVal[INERTIALSERVICE_NAME_LEN] = "{\"Name\":\"MPU6050\"}";
     InertialService_SetParameter(INERTIALSERVICE_NAME_ID, INERTIALSERVICE_NAME_LEN, InertialService_Name_initVal);
@@ -669,7 +675,7 @@ static void ProjectZero_init(void)
     InertialService_SetParameter(INERTIALSERVICE_GYROY_ID, INERTIALSERVICE_GYROY_LEN, InertialService_gyroy_initVal);
     uint8_t InertialService_gyroz_initVal[INERTIALSERVICE_GYROZ_LEN] = {0};
     InertialService_SetParameter(INERTIALSERVICE_GYROZ_ID, INERTIALSERVICE_GYROZ_LEN, InertialService_gyroz_initVal);
-
+    }
 
     // Start Bond Manager and register callback
     VOID GAPBondMgr_Register(&ProjectZero_BondMgrCBs);
@@ -718,13 +724,13 @@ static void ProjectZero_init(void)
 static void ProjectZero_taskFxn(UArg a0, UArg a1)
 {
     // Initialize application
-    ProjectZero_init();
+
     I2C_init();
     GPIO_init();
     init_mpu6060();
     init_BH1750();
     init_BME280();
-
+    ProjectZero_init();
 
     // Application main loop
     for(;; )
