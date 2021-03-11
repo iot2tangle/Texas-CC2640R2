@@ -13,6 +13,9 @@ I2C_Handle handle;
 uint8_t rxBuf[40];
 I2C_Params params;
 
+int flag_mpu6060=0;
+int flag_bh1750=0;
+int flag_bme280=0;
 
 void init_mpu6060(){
     int status;
@@ -32,7 +35,11 @@ void init_mpu6060(){
     // Open I2C
     handle = I2C_open(Board_I2C0, &params);
 
+
     status=I2C_transfer(handle, &i2cTrans);
+    if(status){
+        flag_mpu6060=1;
+    }
     I2C_close(handle);
 }
 
@@ -125,6 +132,9 @@ void init_BH1750(){
         status=I2C_transfer(handle, &i2cTrans);
         txBufacc[0]=0x10;
         status=I2C_transfer(handle, &i2cTrans);
+        if(status){
+            flag_bh1750=1;
+        }
         I2C_close(handle);
 }
 
@@ -206,6 +216,10 @@ void init_BME280(){
         i2cTrans.readBuf      = rxBuf+26;
         i2cTrans.slaveAddress = 0x76;
         status=I2C_transfer(handle, &i2cTrans);
+
+        if(status){
+            flag_bme280=1;
+        }
 
         dig_T1=(rxBuf[1]<<8)|rxBuf[0];
         dig_T2=(rxBuf[3]<<8)|rxBuf[2];
