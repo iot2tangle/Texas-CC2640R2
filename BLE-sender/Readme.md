@@ -20,6 +20,8 @@ The following diagram explains how each sensor of our stack must be connected to
 
 ![I2T Sensors Stack on CC2640R2](https://github.com/iot2tangle/Texas-CC2640R2/blob/main/cc2640_bb.png)
 
+**It is not neccesary to have all the sensors listed here**, the code is able to detect which sensors were connected. In case of not connecting MPU6050 for instance only the environmental service will be active.
+
 # Download Firmware on CC2640R2
 
 ## 1) Install the official IDE:
@@ -41,10 +43,14 @@ The *config.h* file is in the directory *'Texas-CC2640R2/BLE-sender/ble5_project
 This step is not as important as in projects that use WiFi, since in this case we must not connect to any network, the same device is a BLE server and the Gateway will have to READ the device data. 
 
 In this file we can configure the NAME of the device with which the BLE server will be named, set the local data update interval, unlike HTTP or MQTT senders, this interval only updates the data locally (therefore it can be smaller than in the named cases), since the sending data interval to the Tangle is determined by the BLE Gateway, not by the CC2640R2).
+
+The flag **INTERNAL_TEMPERATURE** if true will use the internal temperature sensor to evaluate the temperature. (This value could be not accurate)
 ```
 #define UPDATE_SENSORS_TIMEOUT              500  // TIME IN MILLISECONDS TO UPDATE THE SENSOR DATA
 
 uint8_t name_board[]="TexasInstruments2Tangle";  //NAME OF THE BOARD
+
+#define INTERNAL_TEMPERATURE true
 ```
 ## 4) Compile and Download the Firmware:
 You will import both the folders inside BLE-sender, the first one is the application project, the second one is the stack library of BLE.
