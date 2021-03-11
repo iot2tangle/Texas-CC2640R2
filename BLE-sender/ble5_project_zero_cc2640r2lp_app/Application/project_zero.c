@@ -85,6 +85,8 @@
 #include "EnvironmentalService.h"
 #include "InertialService.h"
 
+#include DeviceFamily_constructPath(driverlib/aon_batmon.h)
+
 
 #include "config.h"
 #include "sensors.h"
@@ -471,6 +473,12 @@ void updateSensors(){
     EnvironmentalService_SetParameter(ENVIRONMENTALSERVICE_PRESSURE_ID, ENVIRONMENTALSERVICE_PRESSURE_LEN, char_value);
     charValueFloat("Humidity", humidity);
     EnvironmentalService_SetParameter(ENVIRONMENTALSERVICE_HUMIDITY_ID, ENVIRONMENTALSERVICE_HUMIDITY_LEN, char_value);
+
+    if(INTERNAL_TEMPERATURE){
+        AONBatMonEnable();
+        temperature=AONBatMonTemperatureGetDegC();
+        AONBatMonDisable();
+    }
     charValueFloat("Temperature", temperature);
     EnvironmentalService_SetParameter(ENVIRONMENTALSERVICE_TEMPERATURE_ID, ENVIRONMENTALSERVICE_TEMPERATURE_LEN, char_value);
 
