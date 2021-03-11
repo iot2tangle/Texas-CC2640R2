@@ -15,5 +15,7 @@
 uint8_t name_board[]="TexasInstruments2Tangle";  //NAME OF THE BOARD
 
 
+#define INTERNAL_TEMPERATURE true
+
 
 #endif /* STARTUP_CONFIG_H_ */
