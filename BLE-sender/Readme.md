@@ -18,7 +18,7 @@ This is the list of Sensors/Modules that you can connect and it will be recogniz
 
 The following diagram explains how each sensor of our stack must be connected to the CC2640R2 pins. 
 
-![I2T Sensors Stack on CC2640R2](https://github.com/iot2tangle/Texas-CC2640R2/blob/main/cc2640_bb.png)
+![I2T Sensors Stack on CC2640R2](https://github.com/iot2tangle/Texas-CC2640R2/blob/main/BLE-sender/cc2640_bb.png)
 
 **It is not neccesary to have all the sensors listed here**, the code is able to detect which sensors were connected. In case of not connecting MPU6050 for instance only the environmental service will be active.
 
